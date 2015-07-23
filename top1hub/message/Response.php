@@ -1,7 +1,6 @@
 <?php
-namespace ys\Http;
-include 'ys/functions.php';
-
+namespace top1hub\message;
+include_once 'functions.php';
 /**
  * HTTP response Object
  */
@@ -98,8 +97,10 @@ final class Response
             try {
                 $jsonData = self::bodyJson($body);
                 if ($code >=400) {
-                    if ($jsonData['errorMessage'] != null) {
+                    if (array_key_exists('errorMessage',$jsonData)) {
                         $this->error = $jsonData['errorMessage'];
+                    }else if(array_key_exists('message',$jsonData)){
+                        $this->error = $jsonData['message'];
                     } else {
                         $this->error = $body;
                     }
@@ -125,7 +126,7 @@ final class Response
 
     private static function bodyJson($body, array $config = array())
     {
-        return \ys\json_decode(
+        return json_decode(
             (string) $body,
             isset($config['object']) ? !$config['object'] : true,
             512,
@@ -166,6 +167,7 @@ final class Response
         if ($code< 0 || ($code / 100 == 5 and $code != 579) || $code == 996) {
             return true;
         }
+        return false;
     }
 
     private static function isJson($headers)

@@ -1,12 +1,8 @@
 <?php
-namespace ys\Http;
-include_once 'ys/Config.php';
-include_once 'ys/Http/Request.php';
-include_once 'ys/Http/Error.php';
-include_once 'ys/Http/Response.php';
-use ys\Config;
-use ys\Http\Request;
-use ys\Http\Response;
+namespace top1hub\message;
+include 'Request.php';
+include 'Response.php';
+use top1hub\Config;
 
 final class Client
 {
@@ -61,7 +57,7 @@ final class Client
 
     private static function userAgent()
     {
-        $sdkInfo = "ysPHP/" . Config::SDK_VER;
+        $sdkInfo = "top1hubPHP/" . Config::SDK_VER;
 
         $systemInfo = php_uname("s");
         $machineInfo = php_uname("m");

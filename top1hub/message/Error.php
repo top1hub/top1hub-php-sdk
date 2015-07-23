@@ -1,5 +1,5 @@
 <?php
-namespace ys\Http;
+namespace top1hub\message;
 
 final class Error
 {
